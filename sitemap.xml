@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://tik.mahyarmozafar.ir/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://tik.mahyarmozafar.ir/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tik.mahyarmozafar.ir/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tik.mahyarmozafar.ir/"/>
+  </url>
+  <url>
+    <loc>https://tik.mahyarmozafar.ir/en/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://tik.mahyarmozafar.ir/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tik.mahyarmozafar.ir/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tik.mahyarmozafar.ir/"/>
+  </url>
+  <url>
+    <loc>https://tik.mahyarmozafar.ir/privacy/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://tik.mahyarmozafar.ir/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tik.mahyarmozafar.ir/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tik.mahyarmozafar.ir/privacy/"/>
+  </url>
+  <url>
+    <loc>https://tik.mahyarmozafar.ir/en/privacy/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://tik.mahyarmozafar.ir/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://tik.mahyarmozafar.ir/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://tik.mahyarmozafar.ir/privacy/"/>
+  </url>
+</urlset>

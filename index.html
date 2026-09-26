@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+/* Runs before the page is drawn: the remembered language, the "English?" bar,
+   the visitor's phone, in-app browsers and the saved color. */
+(function () {
+  var r = document.documentElement, L = r.lang, saved = {};
+  try {
+    if (/[?&]lang=fa\b/.test(location.search)) {
+      localStorage.setItem('tik-lang', 'fa');
+      history.replaceState(null, '', location.pathname + location.hash);
+    }
+    saved.lang = localStorage.getItem('tik-lang');
+    saved.bar = localStorage.getItem('tik-langbar');
+    saved.accent = localStorage.getItem('tik-accent');
+  } catch (e) {}
+  if (L === 'fa' && saved.lang === 'en') { location.replace('/en' + location.pathname + location.hash); return; }
+  var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+  var fa = false;
+  for (var i = 0; i < langs.length; i++) if (/^fa\b/i.test(langs[i])) fa = true;
+  if (saved.bar !== 'closed' && ((L === 'fa' && !fa) || (L === 'en' && fa && saved.lang !== 'en'))) r.className += ' show-langbar';
+  var ua = navigator.userAgent || '';
+  r.setAttribute('data-device', /Android/i.test(ua) ? 'android' : (/iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) ? 'iphone' : 'other');
+  if (/Telegram|Instagram|FBAN|FBAV|Line\/|; wv\)/i.test(ua) || window.TelegramWebviewProxy) r.className += ' inapp';
+  if (saved.accent && /^[a-z]+$/.test(saved.accent)) r.setAttribute('data-accent', saved.accent);
+  r.className += ' js';
+})();
+</script>
+
+<title>تیک — اپ ساده&zwnj;ی کارهای روزانه برای اندروید و آیفون</title>
+<meta name="description" content="تیک یک اپ رایگان و ساده برای کارهای روزانه است، برای اندروید و آیفون: شیشه&zwnj;ای و آرام، فارسی و انگلیسی با تقویم شمسی، با یادآور و ویجت. بدون حساب کاربری و بدون تبلیغ.">
+<meta name="author" content="مهیار مظفر">
+<link rel="canonical" href="https://tik.mahyarmozafar.ir/">
+<link rel="alternate" hreflang="fa" href="https://tik.mahyarmozafar.ir/">
+<link rel="alternate" hreflang="en" href="https://tik.mahyarmozafar.ir/en/">
+<link rel="alternate" hreflang="x-default" href="https://tik.mahyarmozafar.ir/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#EEF1F8">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#07080D">
+<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96.png">
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/vazirmatn-arabic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/vazirmatn-arabic-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/style.css">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="تیک">
+<meta property="og:locale" content="fa_IR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:title" content="تیک — کار را اضافه کن، تیک بزن.">
+<meta property="og:description" content="اپ ساده و شیشه&zwnj;ای کارهای روزانه برای اندروید و آیفون. فارسی و انگلیسی، با تقویم شمسی. رایگان، بدون حساب کاربری و بدون تبلیغ.">
+<meta property="og:url" content="https://tik.mahyarmozafar.ir/">
+<meta property="og:image" content="https://tik.mahyarmozafar.ir/assets/og/og-fa.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="اپ تیک روی آیفون و اندروید">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "تیک",
+  "alternateName": "Tik",
+  "url": "https://tik.mahyarmozafar.ir/",
+  "description": "یک اپ ساده و شیشه‌ای برای کارهای روزانه، برای اندروید و آیفون.",
+  "inLanguage": ["fa", "en"],
+  "applicationCategory": "ProductivityApplication",
+  "operatingSystem": "Android 8.0+, iOS 27",
+  "softwareVersion": "1.0.0",
+  "downloadUrl": "https://tik.mahyarmozafar.ir/download/Tik.apk",
+  "image": "https://tik.mahyarmozafar.ir/assets/icons/icon-512.png",
+  "screenshot": "https://tik.mahyarmozafar.ir/assets/shots/ios/fa-light-today.webp",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Person", "name": "Mahyar Mozafar", "url": "https://mahyarmozafar.ir/" }
+}
+</script>
+<script src="/js/main.js" defer></script>
+<script src="/js/demo.js" defer></script>
+</head>
+<body class="has-tabbar">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.6 3.7 5.6 3.7 9s-1.3 6.4-3.7 9c-2.4-2.6-3.7-5.6-3.7-9S9.6 5.6 12 3z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.5v11.5M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></symbol>
+  <symbol id="i-iphone" viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="3"/><path d="M10.5 5.3h3"/></symbol>
+  <symbol id="i-android" viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.4"/><circle cx="12" cy="5.4" r=".9"/><path d="M10 18.6h4"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></symbol>
+  <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M11 3.5 12.9 9l5.6 1.9-5.6 1.9L11 18.4l-1.9-5.6L3.5 10.9 9.1 9z"/><path d="M18.5 14.5l.9 2.4 2.4.9-2.4.9-.9 2.4-.9-2.4-2.4-.9 2.4-.9z"/></symbol>
+  <symbol id="i-photo" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3.2"/><circle cx="9" cy="9.8" r="1.8"/><path d="m21 15.5-4.8-4.8L7 20"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.1"/><path d="M19.3 13.4a7.6 7.6 0 0 0 0-2.8l2-1.6-2-3.5-2.4 1a7.4 7.4 0 0 0-2.4-1.4L14.1 2.5H9.9l-.4 2.6a7.4 7.4 0 0 0-2.4 1.4l-2.4-1-2 3.5 2 1.6a7.6 7.6 0 0 0 0 2.8l-2 1.6 2 3.5 2.4-1a7.4 7.4 0 0 0 2.4 1.4l.4 2.6h4.2l.4-2.6a7.4 7.4 0 0 0 2.4-1.4l2.4 1 2-3.5z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2.5 3 3-3 3"/><path d="M4 11.5v-1a5 5 0 0 1 5-5h11"/><path d="m7 21.5-3-3 3-3"/><path d="M20 12.5v1a5 5 0 0 1-5 5H4"/></symbol>
+  <symbol id="i-subtasks" viewBox="0 0 24 24"><path d="M10 6h10M10 12h10M10 18h10"/><path d="m3.8 6 1.2 1.2 2.2-2.4M3.8 12l1.2 1.2 2.2-2.4"/><circle cx="5.3" cy="18" r="1.3"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-widget" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="3.5" y="13" width="17" height="7.5" rx="2"/></symbol>
+  <symbol id="i-lists" viewBox="0 0 24 24"><path d="M12 3 3 7.5l9 4.5 9-4.5z"/><path d="m3 12 9 4.5 9-4.5"/><path d="m3 16.5 9 4.5 9-4.5"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><path d="M14 3.5H7A2.5 2.5 0 0 0 4.5 6v12A2.5 2.5 0 0 0 7 20.5h10a2.5 2.5 0 0 0 2.5-2.5V9z"/><path d="M14 3.5V9h5.5M8.5 13h7M8.5 16.5h4.5"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.5 4.5 13.5H11l-1 8 8.5-11H12z"/></symbol>
+  <symbol id="i-translate" viewBox="0 0 24 24"><path d="M3.5 5.5h9M8 3.5v2M10.8 5.5c-.6 3.6-3 6.6-6.8 8.4"/><path d="M6.2 9.2c1 2 2.8 3.6 5 4.5"/><path d="m12.5 20.5 4-9 4 9M14 17.3h5"/></symbol>
+  <symbol id="i-shamsi" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M10.5 13.5h3v4"/></symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.8-.8 1.8-1.7 0-1.3-1.2-1.6-1.2-2.8 0-1 .8-1.7 1.8-1.7H17a4 4 0 0 0 4-4C21 6.5 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.1"/><circle cx="10" cy="7" r="1.1"/><circle cx="15" cy="7.5" r="1.1"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6.5 7 6.5 11.5a6.5 6.5 0 0 1-13 0C5.5 10 12 3 12 3z"/><path d="M9 15a3 3 0 0 0 3 3"/></symbol>
+  <symbol id="i-tablet" viewBox="0 0 24 24"><rect x="3.5" y="3" width="17" height="18" rx="2.5"/><path d="M10.5 18h3"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V6A2.5 2.5 0 0 0 13 3.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5"/></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-8.5 8.5"/><path d="M18.5 13.5V18a2.5 2.5 0 0 1-2.5 2.5H6A2.5 2.5 0 0 1 3.5 18V8A2.5 2.5 0 0 1 6 5.5h4.5"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8.5 8-4 4 4 4M15.5 8l4 4-4 4M13.5 5l-3 14"/></symbol>
+  <symbol id="i-steps" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4.5 6h.01M4.5 12h.01M4.5 18h.01" stroke-width="3"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7.5 5.2v13.6L18.8 12z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-seal" viewBox="0 0 24 24"><path d="M12 2.8l2.1 1.6 2.6-.3 1 2.4 2.4 1-.3 2.6 1.6 2.1-1.6 2.1.3 2.6-2.4 1-1 2.4-2.6-.3L12 21.2l-2.1-1.6-2.6.3-1-2.4-2.4-1 .3-2.6L2.8 12l1.6-2.1-.3-2.6 2.4-1 1-2.4 2.6.3z" fill="currentColor" stroke="none"/><path d="m8.4 12.2 2.4 2.4 4.8-4.9" stroke="#fff" stroke-width="2.2"/></symbol>
+</svg>
+
+<a class="skip" href="#main">رفتن به محتوای اصلی</a>
+<div class="glow" aria-hidden="true"></div>
+
+<div class="langbar" lang="en" dir="ltr" role="region" aria-label="Language">
+  <p>Read this page in English?</p>
+  <a class="langbar__go" href="/en/" hreflang="en" data-lang="en">English</a>
+  <button class="langbar__close" type="button" aria-label="Close" data-langbar-close><svg class="i"><use href="#i-x"/></svg></button>
+</div>
+
+<header class="topbar" id="topbar">
+  <div class="wrap topbar__in">
+    <a class="brand" href="#top"><img src="/assets/icons/tik-96.webp" width="34" height="34" alt=""><span>تیک</span></a>
+    <nav class="topnav" aria-label="بخش&zwnj;های صفحه">
+      <a href="#demo">دمو</a>
+      <a href="#features">امکانات</a>
+      <a href="#screens">تصویرها</a>
+      <a href="#faq">پرسش&zwnj;ها</a>
+    </nav>
+    <span class="topbar__spacer"></span>
+    <a class="lang-btn" href="/en/" hreflang="en" lang="en" data-lang="en"><svg class="i"><use href="#i-globe"/></svg>English</a>
+    <a class="btn btn--accent btn--sm topbar__dl" href="#download"><svg class="i"><use href="#i-download"/></svg>دانلود</a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="wrap hero" id="top" aria-labelledby="hero-title">
+    <div class="hero__text">
+      <img class="hero__icon" src="/assets/icons/tik-288.webp" width="92" height="92" alt="آیکون اپ تیک">
+      <span class="pill">رایگان، برای اندروید و آیفون</span>
+      <h1 id="hero-title">کار را اضافه کن، <span class="grad">تیک بزن.</span></h1>
+      <p class="hero__sub">تیک یک اپ ساده و شیشه&zwnj;ای برای کارهای روزانه است. کارهای امروزت را ببین، با یک لمس تیک بزن و پر شدن نوار پیشرفت را تماشا کن. به فارسی و انگلیسی، با تقویم شمسی.</p>
+      <div class="hero__cta">
+        <a class="btn btn--accent btn--lg cta-android" href="/download/Tik.apk" download="Tik-1.0.0.apk" data-apk data-count="download-android-hero">
+          <svg class="i"><use href="#i-download"/></svg>
+          <span class="btn__text"><span>دانلود برای اندروید</span><span class="btn__meta" data-apk-meta>نسخه&zwnj;ی <bdi>1.0.0</bdi> · <bdi>4 MB</bdi></span></span>
+        </a>
+        <button class="btn btn--glass btn--lg cta-ios" type="button" data-sheet="ios-sheet" data-count="ios-steps-hero">
+          <svg class="i"><use href="#i-iphone"/></svg>
+          <span class="btn__text"><span>نصب رایگان روی آیفون</span><span class="btn__meta">با <bdi>Xcode</bdi> روی مک</span></span>
+        </button>
+      </div>
+      <div class="inapp-hint" role="note">
+        <strong>دانلود ممکن است اینجا کار نکند.</strong>
+        این صفحه داخل یک برنامه (مثل تلگرام یا اینستاگرام) باز شده. برای دانلود، آن را در کروم باز کن: دکمه&zwnj;ی <bdi>⋮</bdi> یا <bdi>…</bdi> بالای صفحه را بزن و «باز کردن در مرورگر» (<bdi>Open in browser</bdi>) را انتخاب کن.
+        <button class="btn btn--glass btn--sm" type="button" data-copy-link><svg class="i"><use href="#i-copy"/></svg><span>کپی لینک</span></button>
+      </div>
+      <p class="hero__trust">رایگان · بدون حساب کاربری · بدون تبلیغ</p>
+    </div>
+
+    <div class="demo" id="demo">
+      <div class="phone" role="group" aria-label="دموی زنده&zwnj;ی تیک">
+        <div class="phone__screen">
+          <div class="app" data-demo>
+            <div class="app__status" dir="ltr" aria-hidden="true">
+              <span>9:41</span>
+              <span class="app__island"></span>
+              <span class="app__sys">
+                <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                <svg viewBox="0 0 16 12"><path d="M8 2.2c2.4 0 4.6.9 6.3 2.5l1.2-1.3A10.6 10.6 0 0 0 8 .4 10.6 10.6 0 0 0 .5 3.4l1.2 1.3A8.8 8.8 0 0 1 8 2.2zm0 3.6c1.4 0 2.8.5 3.8 1.5L13 6a7.4 7.4 0 0 0-10 0l1.2 1.3A5.4 5.4 0 0 1 8 5.8zm0 3.5a2 2 0 0 0-1.4.6L8 11.6l1.4-1.7A2 2 0 0 0 8 9.3z"/></svg>
+                <svg viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.5" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="20" height="9" rx="2"/><path d="M25 4.5v4c.8-.3 1.5-1.1 1.5-2s-.7-1.7-1.5-2z" opacity=".45"/></svg>
+              </span>
+            </div>
+            <div class="app__head">
+              <div>
+                <p class="app__date" id="demo-date">شنبه 4 مهر</p>
+                <script>try{document.getElementById('demo-date').textContent=new Intl.DateTimeFormat('fa-IR-u-ca-persian-nu-latn',{weekday:'long',day:'numeric',month:'long'}).format(new Date())}catch(e){}</script>
+                <p class="app__title">امروز</p>
+              </div>
+              <button class="app__gear" type="button" data-sheet="colors-sheet" aria-label="تنظیمات: رنگ اپ"><svg class="i"><use href="#i-gear"/></svg></button>
+            </div>
+            <div class="app__progress" data-demo-progress>
+              <div class="app__progress-row">
+                <span class="app__count"><svg><use href="#i-seal"/></svg><span data-demo-count aria-live="polite">1 از 6 انجام شد</span></span>
+                <span class="app__pct" data-demo-pct>17%</span>
+              </div>
+              <div class="app__bar"><span data-demo-bar style="--p:.1667"></span></div>
+            </div>
+            <ul class="app__list" data-demo-list>
+              <li class="task" data-id="bill" data-prio="high">
+                <button class="task__btn" type="button" role="checkbox" aria-checked="false">
+                  <span class="task__check"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+                  <span class="task__body">
+                    <span class="task__title">پرداخت قبض اینترنت</span>
+                    <span class="task__meta"><span class="meta meta--late"><svg><use href="#i-calendar"/></svg>دیروز</span><span class="meta"><i class="meta__dot" style="--c:var(--blue)"></i>شخصی</span></span>
+                  </span>
+                  <span class="task__prio" aria-hidden="true">!!!</span>
+                </button>
+              </li>
+              <li class="task" data-id="email" data-prio="high">
+                <button class="task__btn" type="button" role="checkbox" aria-checked="false">
+                  <span class="task__check"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+                  <span class="task__body">
+                    <span class="task__title">جواب ایمیل سارا</span>
+                    <span class="task__meta"><span class="meta"><svg><use href="#i-clock"/></svg><bdi>10:00</bdi></span><span class="meta"><i class="meta__dot" style="--c:var(--orange)"></i>کاری</span></span>
+                  </span>
+                  <span class="task__prio" aria-hidden="true">!!!</span>
+                </button>
+              </li>
+              <li class="task" data-id="read">
+                <button class="task__btn" type="button" role="checkbox" aria-checked="false">
+                  <span class="task__check"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+                  <span class="task__body">
+                    <span class="task__title">خواندن <bdi>20</bdi> صفحه کتاب</span>
+                    <span class="task__meta"><span class="meta"><svg><use href="#i-clock"/></svg><bdi>21:30</bdi></span><span class="meta"><svg><use href="#i-repeat"/></svg></span><span class="meta"><i class="meta__dot" style="--c:var(--blue)"></i>شخصی</span></span>
+                  </span>
+                  <span class="task__prio" aria-hidden="true"></span>
+                </button>
+              </li>
+              <li class="task" data-id="mom" data-prio="medium">
+                <button class="task__btn" type="button" role="checkbox" aria-checked="false">
+                  <span class="task__check"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+                  <span class="task__body">
+                    <span class="task__title">تماس با مامان</span>
+                    <span class="task__meta"><span class="meta"><i class="meta__dot" style="--c:var(--blue)"></i>شخصی</span></span>
+                  </span>
+                  <span class="task__prio" aria-hidden="true">!!</span>
+                </button>
+              </li>
+              <li class="task" data-id="groceries">
+                <button class="task__btn" type="button" role="checkbox" aria-checked="false">
+                  <span class="task__check"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+                  <span class="task__body">
+                    <span class="task__title">خرید خانه</span>
+                    <span class="task__meta"><span class="meta"><i class="meta__dot" style="--c:var(--green)"></i>خرید</span><span class="meta"><svg><use href="#i-subtasks"/></svg><bdi>1/3</bdi></span></span>
+                  </span>
+                  <span class="task__prio" aria-hidden="true"></span>
+                </button>
+              </li>
+              <li class="task is-done" data-id="plants">
+                <button class="task__btn" type="button" role="checkbox" aria-checked="true">
+                  <span class="task__check"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+                  <span class="task__body">
+                    <span class="task__title">آب دادن به گلدان&zwnj;ها</span>
+                    <span class="task__meta"><span class="meta"><i class="meta__dot" style="--c:var(--blue)"></i>شخصی</span></span>
+                  </span>
+                  <span class="task__prio" aria-hidden="true"></span>
+                </button>
+              </li>
+            </ul>
+            <div class="app__quick">
+              <form class="quick" data-demo-form>
+                <input class="quick__input" type="text" enterkeyhint="done" autocomplete="off" maxlength="60" placeholder="کار جدید" aria-label="کار جدید" tabindex="-1" data-demo-input>
+              </form>
+              <button class="fab" type="button" aria-label="افزودن کار" aria-expanded="false" data-demo-fab><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+            <div class="app__tabs" aria-hidden="true">
+              <span class="app__tab is-active"><svg><use href="#i-sun"/></svg>امروز</span>
+              <span class="app__tab" data-demo-tab><svg><use href="#i-lists"/></svg>لیست&zwnj;ها</span>
+              <span class="app__tab" data-demo-tab><svg><use href="#i-search"/></svg>جستجو</span>
+            </div>
+            <p class="app__toast" role="status" data-demo-toast></p>
+            <canvas class="app__confetti" aria-hidden="true" data-demo-confetti></canvas>
+            <span class="app__home" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+      <p class="demo__hint">روی هر کار بزن تا تیک بخورد. با دکمه&zwnj;ی <bdi>+</bdi> کار تازه اضافه کن.</p>
+      <div class="colors">
+        <button class="btn btn--glass btn--sm colors__btn" type="button" data-sheet="colors-sheet"><span class="swatch" aria-hidden="true"></span>عوض کردن رنگ</button>
+        <div class="colors__dots" role="group" aria-label="رنگ اصلی" data-color-dots></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" id="features" aria-labelledby="features-title">
+    <div class="section__head">
+      <span class="pill">امکانات</span>
+      <h2 id="features-title">هرچه لازم داری، نه بیشتر.</h2>
+      <p>تیک ساده است، ولی هرچه برای مرتب ماندن روزت لازم داری را دارد.</p>
+    </div>
+    <div class="features">
+      <article class="card feature"><span class="feature__icon"><svg class="i"><use href="#i-sun"/></svg></span><h3>امروز</h3><p>کارهای امروز و کارهای عقب&zwnj;افتاده را با یک نوار پیشرفت می&zwnj;بینی. کارهای انجام&zwnj;شده پایین می&zwnj;روند و آخرین کار روز با کاغذرنگی جشن گرفته می&zwnj;شود.</p></article>
+      <article class="card feature"><span class="feature__icon"><svg class="i"><use href="#i-bolt"/></svg></span><h3>افزودن سریع</h3><p>دکمه&zwnj;ی شیشه&zwnj;ای <bdi>+</bdi> به یک کادر نوشتن تبدیل می&zwnj;شود و بعد از هر کار باز می&zwnj;ماند؛ کارهای یک روز کامل را یک&zwnj;جا بنویس.</p></article>
+      <article class="card feature"><span class="feature__icon"><svg class="i"><use href="#i-lists"/></svg></span><h3>لیست&zwnj;ها</h3><p>صندوق ورودی و لیست&zwnj;های خودت با رنگ و آیکون دلخواه، به&zwnj;علاوه&zwnj;ی لیست&zwnj;های هوشمند: امروز، برنامه&zwnj;ریزی&zwnj;شده، همه و انجام&zwnj;شده&zwnj;ها.</p></article>
+      <article class="card feature"><span class="feature__icon"><svg class="i"><use href="#i-note"/></svg></span><h3>جزئیات کار</h3><p>یادداشت، زیرکار، روز و ساعت، اولویت، عکس و تکرار: هر روز، روزهای خاصی از هفته، هر چند روز یک بار، هر هفته، هر ماه یا هر سال.</p></article>
+      <article class="card feature"><span class="feature__icon"><svg class="i"><use href="#i-bell"/></svg></span><h3>یادآور</h3><p>اعلان&zwnj;هایی با دکمه&zwnj;های «انجام شد» و «<bdi>10</bdi> دقیقه&zwnj;ی دیگر یادم بینداز» که بدون باز کردن اپ کار می&zwnj;کنند.</p></article>
+      <article class="card feature"><span class="feature__icon"><svg class="i"><use href="#i-widget"/></svg></span><h3>ویجت</h3><p>کارهای امروز روی صفحه&zwnj;ی اصلی گوشی؛ همان&zwnj;جا تیکشان بزن.</p></article>
+      <article class="card feature"><span class="feature__icon"><svg class="i"><use href="#i-translate"/></svg></span><h3>فارسی و انگلیسی</h3><p>زبان را داخل خود اپ عوض کن، هر زبانی که گوشی&zwnj;ات داشته باشد. فارسی کاملاً راست&zwnj;به&zwnj;چپ است، با فونت وزیرمتن.</p></article>
+      <article class="card feature"><span class="feature__icon"><svg class="i"><use href="#i-shamsi"/></svg></span><h3>تقویم شمسی</h3><p>تقویم شمسی پیش&zwnj;فرض است و هفته از شنبه شروع می&zwnj;شود. اگر خواستی، میلادی هم هست.</p></article>
+      <article class="card feature"><span class="feature__icon"><svg class="i"><use href="#i-palette"/></svg></span><h3>به سلیقه&zwnj;ی خودت</h3><p>روشن یا تیره، <bdi>11</bdi> رنگ، <bdi>6</bdi> آیکون، لرزش و صدا. هر بخشی از جزئیات کار را که لازم نداری خاموش کن.</p></article>
+      <article class="card feature"><span class="feature__icon"><svg class="i"><use href="#i-drop"/></svg></span><h3>شیشه&zwnj;ای</h3><p>نوارها و دکمه&zwnj;ها از شیشه&zwnj;اند و هرچه پشتشان حرکت کند، نرم و محو دیده می&zwnj;شود.</p></article>
+      <article class="card feature"><span class="feature__icon"><svg class="i"><use href="#i-tablet"/></svg></span><h3>گوشی و تبلت</h3><p>روی گوشی یک نوار شناور پایین صفحه، روی آیپد و تبلت یک ستون کناری با جستجو.</p></article>
+      <article class="card feature"><span class="feature__icon"><svg class="i"><use href="#i-lock"/></svg></span><h3>خصوصی</h3><p>نه حساب کاربری، نه اینترنت. کارهایت فقط روی گوشی خودت می&zwnj;ماند.</p></article>
+    </div>
+  </section>
+
+  <section class="wrap section" id="screens" aria-labelledby="screens-title">
+    <div class="section__head">
+      <span class="pill">تصویرها</span>
+      <h2 id="screens-title">از نزدیک ببین</h2>
+      <p>روشن یا تیره، فارسی یا انگلیسی، آیفون یا اندروید؛ خودت انتخاب کن.</p>
+    </div>
+    <div class="switches">
+      <div class="seg" role="radiogroup" aria-label="حالت نمایش" data-switch="theme">
+        <button type="button" role="radio" aria-checked="true" data-value="light">روشن</button>
+        <button type="button" role="radio" aria-checked="false" data-value="dark">تیره</button>
+        <span class="seg__thumb" aria-hidden="true"></span>
+      </div>
+      <div class="seg" role="radiogroup" aria-label="زبان اپ" data-switch="lang">
+        <button type="button" role="radio" aria-checked="true" data-value="fa">فارسی</button>
+        <button type="button" role="radio" aria-checked="false" data-value="en" lang="en">English</button>
+        <span class="seg__thumb" aria-hidden="true"></span>
+      </div>
+      <div class="seg" role="radiogroup" aria-label="گوشی" data-switch="platform">
+        <button type="button" role="radio" aria-checked="true" data-value="ios">آیفون</button>
+        <button type="button" role="radio" aria-checked="false" data-value="android">اندروید</button>
+        <span class="seg__thumb" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div class="gallery" tabindex="0" aria-label="تصویرهای اپ" data-gallery>
+      <figure class="shot"><div class="shot__frame"><img src="/assets/shots/ios/fa-light-today.webp" width="506" height="1100" alt="صفحه&zwnj;ی امروز" loading="lazy" decoding="async" data-shot="today"></div><figcaption>امروز</figcaption></figure>
+      <figure class="shot"><div class="shot__frame"><img src="/assets/shots/ios/fa-light-lists.webp" width="506" height="1100" alt="لیست&zwnj;ها" loading="lazy" decoding="async" data-shot="lists"></div><figcaption>لیست&zwnj;ها</figcaption></figure>
+      <figure class="shot"><div class="shot__frame"><img src="/assets/shots/ios/fa-light-editor.webp" width="506" height="1100" alt="ویرایش کار" loading="lazy" decoding="async" data-shot="editor"></div><figcaption>ویرایش کار</figcaption></figure>
+      <figure class="shot"><div class="shot__frame"><img src="/assets/shots/ios/fa-light-settings.webp" width="506" height="1100" alt="تنظیمات" loading="lazy" decoding="async" data-shot="settings"></div><figcaption>تنظیمات</figcaption></figure>
+    </div>
+    <div class="dots" aria-hidden="true" data-dots><span class="is-active"></span><span></span><span></span><span></span></div>
+    <div class="extras">
+      <figure class="x-widgets"><div class="shot__frame"><img src="/assets/shots/ios/widgets.webp" width="506" height="1100" alt="ویجت&zwnj;های تیک روی صفحه&zwnj;ی اصلی" loading="lazy" decoding="async" data-extra="widgets"></div><figcaption>ویجت&zwnj;ها</figcaption></figure>
+      <figure class="x-tablet"><div class="shot__frame"><img src="/assets/shots/ios/tablet.webp" width="1050" height="1400" alt="تیک روی آیپد با ستون کناری" loading="lazy" decoding="async" data-extra="tablet"></div><figcaption data-tablet-caption>آیپد</figcaption></figure>
+    </div>
+
+    <h3 class="sub-head">در حرکت</h3>
+    <div class="gallery gallery--3" data-videos>
+      <figure class="vid" data-video="quick-add">
+        <div class="shot__frame"><video muted loop playsinline preload="none" width="540" height="1174" aria-label="ویدیوی افزودن سریع"></video><button class="vid__play" type="button" aria-label="پخش ویدیو"><span><svg class="i"><use href="#i-play"/></svg></span></button></div>
+        <figcaption>افزودن سریع</figcaption>
+      </figure>
+      <figure class="vid" data-video="confetti">
+        <div class="shot__frame"><video muted loop playsinline preload="none" width="540" height="1174" aria-label="ویدیوی جشن آخر روز"></video><button class="vid__play" type="button" aria-label="پخش ویدیو"><span><svg class="i"><use href="#i-play"/></svg></span></button></div>
+        <figcaption>جشن آخر روز</figcaption>
+      </figure>
+      <figure class="vid" data-video="language">
+        <div class="shot__frame"><video muted loop playsinline preload="none" width="540" height="1174" aria-label="ویدیوی عوض کردن زبان"></video><button class="vid__play" type="button" aria-label="پخش ویدیو"><span><svg class="i"><use href="#i-play"/></svg></span></button></div>
+        <figcaption>عوض کردن زبان</figcaption>
+      </figure>
+    </div>
+    <div class="dots" aria-hidden="true" data-dots-videos><span class="is-active"></span><span></span><span></span></div>
+  </section>
+
+  <section class="wrap section" id="download" aria-labelledby="download-title">
+    <div class="section__head">
+      <span class="pill">دانلود</span>
+      <h2 id="download-title">تیک را بگیر</h2>
+      <p>رایگان، بدون حساب کاربری و بدون تبلیغ.</p>
+    </div>
+    <div class="dl-grid">
+      <article class="dl-card" id="android" aria-labelledby="android-title">
+        <div class="dl-card__head">
+          <span class="dl-card__badge"><svg class="i"><use href="#i-android"/></svg></span>
+          <div><h3 id="android-title">اندروید</h3><p class="dl-card__req">اندروید <bdi>8</bdi> یا جدیدتر · گوشی و تبلت</p></div>
+        </div>
+        <a class="btn btn--accent btn--lg" href="/download/Tik.apk" download="Tik-1.0.0.apk" data-apk data-count="download-android">
+          <svg class="i"><use href="#i-download"/></svg>
+          <span class="btn__text"><span>دانلود فایل نصب</span><span class="btn__meta" data-apk-meta>نسخه&zwnj;ی <bdi>1.0.0</bdi> · <bdi>4 MB</bdi></span></span>
+        </a>
+        <div class="inapp-hint" role="note">
+          <strong>دانلود ممکن است اینجا کار نکند.</strong>
+          این صفحه را در کروم باز کن: دکمه&zwnj;ی <bdi>⋮</bdi> یا <bdi>…</bdi> بالای صفحه را بزن و «باز کردن در مرورگر» (<bdi>Open in browser</bdi>) را انتخاب کن.
+          <button class="btn btn--glass btn--sm" type="button" data-copy-link><svg class="i"><use href="#i-copy"/></svg><span>کپی لینک</span></button>
+        </div>
+        <ol class="steps">
+          <li><span>روی دکمه بزن. اگر مرورگر پرسید که فایل را نگه دارد یا نه، «دانلود» یا «نگه داشتن» را بزن.</span></li>
+          <li><span>فایل دانلودشده را باز کن. اگر اندروید اجازه خواست، به مرورگر یا برنامه&zwnj;ی فایل&zwnj;ها اجازه&zwnj;ی نصب برنامه بده.</span></li>
+          <li><span>روی «نصب» بزن. نسخه&zwnj;های تازه هم همین&zwnj;طور نصب می&zwnj;شوند و کارهایت سر جایشان می&zwnj;مانند.</span></li>
+        </ol>
+        <p class="note">این همان فایلِ نسخه&zwnj;ی رسمی در گیت&zwnj;هاب است. اگر بخواهی، می&zwnj;توانی آن را از <a href="https://github.com/MahyarMozafar/tik-todo-android/releases/latest" rel="noopener">صفحه&zwnj;ی انتشار در گیت&zwnj;هاب</a> هم دانلود کنی.</p>
+        <div class="qr">
+          <img src="/assets/qr-fa.svg" width="104" height="104" alt="کد QR برای باز کردن همین صفحه روی گوشی" loading="lazy">
+          <p>روی کامپیوتری؟ با دوربین گوشی این کد را اسکن کن تا همین صفحه روی گوشی باز شود.</p>
+        </div>
+      </article>
+      <article class="dl-card" id="iphone" aria-labelledby="iphone-title">
+        <div class="dl-card__head">
+          <span class="dl-card__badge"><svg class="i"><use href="#i-iphone"/></svg></span>
+          <div><h3 id="iphone-title">آیفون و آیپد</h3><p class="dl-card__req"><bdi>iOS 27</bdi> · نصب رایگان با <bdi>Xcode</bdi></p></div>
+        </div>
+        <p>تیک در اپ&zwnj;استور نیست؛ ولی می&zwnj;توانی آن را رایگان با <bdi>Xcode</bdi> روی مک نصب کنی. با حساب رایگان اپل، اپ <bdi>7</bdi> روز کار می&zwnj;کند؛ بعد گوشی را دوباره به مک وصل کن و <bdi>Run</bdi> را بزن. کارهایت سر جایشان می&zwnj;مانند.</p>
+        <button class="btn btn--accent btn--lg" type="button" data-sheet="ios-sheet" data-count="ios-steps"><svg class="i"><use href="#i-steps"/></svg>دیدن مراحل نصب</button>
+        <a class="btn btn--glass" href="https://github.com/MahyarMozafar/tik-todo-ios" rel="noopener"><svg class="i flip"><use href="#i-external"/></svg>دریافت نسخه&zwnj;ی آیفون از گیت&zwnj;هاب</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap section" id="faq" aria-labelledby="faq-title">
+    <div class="section__head">
+      <span class="pill">پرسش&zwnj;ها</span>
+      <h2 id="faq-title">پرسش&zwnj;های رایج</h2>
+    </div>
+    <div class="faq">
+      <details><summary>تیک رایگان است؟<svg class="i"><use href="#i-chevron"/></svg></summary><div class="answer"><p>بله، کاملاً رایگان. نه تبلیغ دارد، نه حساب کاربری و نه خرید درون&zwnj;برنامه&zwnj;ای.</p></div></details>
+      <details><summary>کارهایم کجا ذخیره می&zwnj;شوند؟<svg class="i"><use href="#i-chevron"/></svg></summary><div class="answer"><p>فقط روی گوشی خودت. تیک هیچ&zwnj;وقت به اینترنت وصل نمی&zwnj;شود؛ نسخه&zwnj;ی اندروید حتی اجازه&zwnj;ی استفاده از اینترنت را هم ندارد.</p><p>اگر پشتیبان&zwnj;گیری خود گوشی (گوگل یا <bdi>iCloud</bdi>) روشن باشد، ممکن است مثل بقیه&zwnj;ی برنامه&zwnj;ها از کارهای تیک هم نسخه&zwnj;ی پشتیبان بگیرد.</p></div></details>
+      <details><summary>به اینترنت نیاز دارد؟<svg class="i"><use href="#i-chevron"/></svg></summary><div class="answer"><p>نه. تیک کاملاً آفلاین کار می&zwnj;کند. فقط برای دانلود کردنش به اینترنت نیاز داری.</p></div></details>
+      <details><summary>چرا در گوگل&zwnj;پلی یا اپ&zwnj;استور نیست؟<svg class="i"><use href="#i-chevron"/></svg></summary><div class="answer"><p>تیک یک پروژه&zwnj;ی شخصی و رایگان است و فعلاً در فروشگاه&zwnj;ها منتشر نشده. نسخه&zwnj;ی اندروید را از همین صفحه دانلود کن و نسخه&zwnj;ی آیفون را رایگان با <bdi>Xcode</bdi> نصب کن.</p></div></details>
+      <details><summary>اندروید می&zwnj;گوید «برنامه&zwnj;ی ناشناس». امن است؟<svg class="i"><use href="#i-chevron"/></svg></summary><div class="answer"><p>اندروید این پیام را برای هر برنامه&zwnj;ای که از گوگل&zwnj;پلی نیامده نشان می&zwnj;دهد. فایل تیک همان فایلِ نسخه&zwnj;ی رسمی در گیت&zwnj;هاب است و کد آن برای همه باز است.</p><p>اگر خواستی درستی فایل را بررسی کنی، اثر انگشت <bdi>SHA-256</bdi> آن این است:</p><code class="hash" data-apk-sha>33c18478b65011fc78e891a89a238c1e825bcdf0cd006a2d317413bdc1f59429</code></div></details>
+      <details><summary>روی چه گوشی&zwnj;هایی کار می&zwnj;کند؟<svg class="i"><use href="#i-chevron"/></svg></summary><div class="answer"><p>اندروید <bdi>8</bdi> یا جدیدتر، روی گوشی و تبلت. آیفون و آیپد با <bdi>iOS 27</bdi>.</p></div></details>
+      <details><summary>چطور به&zwnj;روزش کنم؟<svg class="i"><use href="#i-chevron"/></svg></summary><div class="answer"><p>اندروید: فایل تازه را از همین صفحه دانلود و نصب کن؛ روی نسخه&zwnj;ی قبلی نصب می&zwnj;شود و کارهایت می&zwnj;مانند.</p><p>آیفون: کد تازه را از گیت&zwnj;هاب بگیر و دوباره در <bdi>Xcode</bdi> دکمه&zwnj;ی <bdi>Run</bdi> را بزن.</p></div></details>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__in">
+    <div>
+      <p class="footer__brand"><img src="/assets/icons/tik-96.webp" width="30" height="30" alt="">تیک — کار را اضافه کن، تیک بزن.</p>
+      <small>© <bdi>2026</bdi> مهیار مظفر</small>
+    </div>
+    <ul class="footer__links">
+      <li><a href="https://mahyarmozafar.ir/">ساخته&zwnj;ی مهیار مظفر</a></li>
+      <li><a href="https://mahyarmozafar.ir/projects/tik-todo-ios/">تیک چطور ساخته شد</a></li>
+      <li><a href="/privacy/">حریم خصوصی</a></li>
+      <li><a href="/en/" hreflang="en" lang="en" data-lang="en">English</a></li>
+    </ul>
+  </div>
+</footer>
+
+<nav class="tabbar" aria-label="رفتن به بخش&zwnj;ها" data-tabbar>
+  <div class="tabbar__pill">
+    <span class="tabbar__drop" aria-hidden="true"></span>
+    <a class="tab is-active" href="#demo" data-tab="demo"><svg class="i"><use href="#i-sun"/></svg><span>دمو</span></a>
+    <a class="tab" href="#features" data-tab="features"><svg class="i"><use href="#i-sparkle"/></svg><span>امکانات</span></a>
+    <a class="tab" href="#screens" data-tab="screens"><svg class="i"><use href="#i-photo"/></svg><span>تصویرها</span></a>
+  </div>
+  <a class="tabbar__dl" href="#download" data-tab="download"><svg class="i"><use href="#i-download"/></svg><span>دانلود</span></a>
+</nav>
+
+<dialog class="sheet" id="colors-sheet" aria-labelledby="colors-title">
+  <div class="sheet__panel">
+    <span class="sheet__grab" aria-hidden="true"></span>
+    <div class="sheet__head" data-sheet-drag>
+      <h2 id="colors-title">رنگ اصلی</h2>
+      <button class="sheet__close" type="button" aria-label="بستن" data-sheet-close><svg class="i"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="sheet__body">
+      <p class="note" style="margin-top:0;margin-bottom:16px">مثل خود اپ، یکی از <bdi>11</bdi> رنگ را انتخاب کن. دمو و کل صفحه با آن رنگ می&zwnj;شوند.</p>
+      <div class="color-grid" data-color-grid></div>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="sheet" id="ios-sheet" aria-labelledby="ios-title">
+  <div class="sheet__panel">
+    <span class="sheet__grab" aria-hidden="true"></span>
+    <div class="sheet__head" data-sheet-drag>
+      <h2 id="ios-title">نصب رایگان روی آیفون</h2>
+      <button class="sheet__close" type="button" aria-label="بستن" data-sheet-close><svg class="i"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="sheet__body">
+      <p class="note" style="margin-top:0">برای این کار یک مک با <bdi>Xcode 27</bdi> و یک <bdi>Apple ID</bdi> رایگان لازم داری. حساب پولی برنامه&zwnj;نویسی اپل لازم نیست.</p>
+      <ol class="steps">
+        <li><span><bdi>Xcode 27</bdi> را روی مک نصب کن، مخزن تیک را از گیت&zwnj;هاب بگیر (<bdi>clone</bdi>) و فایل <bdi>Tik.xcodeproj</bdi> را باز کن.</span></li>
+        <li><span>در <bdi>Xcode</bdi> به <bdi>Settings → Accounts</bdi> برو و با <bdi>Apple ID</bdi> خودت وارد شو.</span></li>
+        <li><span>تارگت <bdi>Tik</bdi> را انتخاب کن، بخش <bdi>Signing &amp; Capabilities</bdi> را باز کن و <bdi>Personal Team</bdi> خودت را انتخاب کن. همین کار را برای تارگت <bdi>TikWidget</bdi> هم انجام بده.</span></li>
+        <li><span>آیفون را به مک وصل کن، <bdi>Developer Mode</bdi> را روشن کن (<bdi>Settings → Privacy &amp; Security → Developer Mode</bdi>)، گوشی را بالای پنجره&zwnj;ی <bdi>Xcode</bdi> انتخاب کن و <bdi>Run</bdi> را بزن.</span></li>
+        <li><span>بار اول، روی خود آیفون به اپ اعتماد کن: <bdi>Settings → General → VPN &amp; Device Management</bdi>.</span></li>
+      </ol>
+      <p class="note">با حساب رایگان، اپ <bdi>7</bdi> روز کار می&zwnj;کند. بعد از آن گوشی را وصل کن و دوباره <bdi>Run</bdi> را بزن؛ کارهایت سر جایشان می&zwnj;مانند.</p>
+      <p class="note">اگر <bdi>Xcode</bdi> درباره&zwnj;ی <bdi>bundle ID</bdi> یا <bdi>App Group</bdi> ایراد گرفت، <bdi>com.mahyarmozafar</bdi> را در فایل <bdi>project.yml</bdi> به یک نام دیگر عوض کن و <bdi>xcodegen</bdi> را اجرا کن.</p>
+      <a class="btn btn--accent" style="width:100%;margin-top:18px" href="https://github.com/MahyarMozafar/tik-todo-ios" rel="noopener"><svg class="i flip"><use href="#i-external"/></svg>دریافت نسخه&zwnj;ی آیفون از گیت&zwnj;هاب</a>
+    </div>
+  </div>
+</dialog>
+</body>
+</html>

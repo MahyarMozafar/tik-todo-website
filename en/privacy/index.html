@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+/* Runs before the page is drawn: the remembered language, the "English?" bar,
+   the visitor's phone, in-app browsers and the saved color. */
+(function () {
+  var r = document.documentElement, L = r.lang, saved = {};
+  try {
+    if (/[?&]lang=fa\b/.test(location.search)) {
+      localStorage.setItem('tik-lang', 'fa');
+      history.replaceState(null, '', location.pathname + location.hash);
+    }
+    saved.lang = localStorage.getItem('tik-lang');
+    saved.bar = localStorage.getItem('tik-langbar');
+    saved.accent = localStorage.getItem('tik-accent');
+  } catch (e) {}
+  if (L === 'fa' && saved.lang === 'en') { location.replace('/en' + location.pathname + location.hash); return; }
+  var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+  var fa = false;
+  for (var i = 0; i < langs.length; i++) if (/^fa\b/i.test(langs[i])) fa = true;
+  if (saved.bar !== 'closed' && ((L === 'fa' && !fa) || (L === 'en' && fa && saved.lang !== 'en'))) r.className += ' show-langbar';
+  var ua = navigator.userAgent || '';
+  r.setAttribute('data-device', /Android/i.test(ua) ? 'android' : (/iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) ? 'iphone' : 'other');
+  if (/Telegram|Instagram|FBAN|FBAV|Line\/|; wv\)/i.test(ua) || window.TelegramWebviewProxy) r.className += ' inapp';
+  if (saved.accent && /^[a-z]+$/.test(saved.accent)) r.setAttribute('data-accent', saved.accent);
+  r.className += ' js';
+})();
+</script>
+
+<title>Privacy — Tik</title>
+<meta name="description" content="Tik collects nothing about you: no account, no internet, and your tasks stay on your phone.">
+<link rel="canonical" href="https://tik.mahyarmozafar.ir/en/privacy/">
+<link rel="alternate" hreflang="fa" href="https://tik.mahyarmozafar.ir/privacy/">
+<link rel="alternate" hreflang="en" href="https://tik.mahyarmozafar.ir/en/privacy/">
+<link rel="alternate" hreflang="x-default" href="https://tik.mahyarmozafar.ir/privacy/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#EEF1F8">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#07080D">
+<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96.png">
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="/css/style.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tik">
+<meta property="og:title" content="Tik's privacy">
+<meta property="og:description" content="Tik collects nothing about you. Your tasks stay on your phone.">
+<meta property="og:url" content="https://tik.mahyarmozafar.ir/en/privacy/">
+<meta property="og:image" content="https://tik.mahyarmozafar.ir/assets/og/og-en.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script src="/js/main.js" defer></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.6 3.7 5.6 3.7 9s-1.3 6.4-3.7 9c-2.4-2.6-3.7-5.6-3.7-9S9.6 5.6 12 3z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.5v11.5M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></symbol>
+  <symbol id="i-iphone" viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="3"/><path d="M10.5 5.3h3"/></symbol>
+  <symbol id="i-android" viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.4"/><circle cx="12" cy="5.4" r=".9"/><path d="M10 18.6h4"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></symbol>
+  <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M11 3.5 12.9 9l5.6 1.9-5.6 1.9L11 18.4l-1.9-5.6L3.5 10.9 9.1 9z"/><path d="M18.5 14.5l.9 2.4 2.4.9-2.4.9-.9 2.4-.9-2.4-2.4-.9 2.4-.9z"/></symbol>
+  <symbol id="i-photo" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3.2"/><circle cx="9" cy="9.8" r="1.8"/><path d="m21 15.5-4.8-4.8L7 20"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.1"/><path d="M19.3 13.4a7.6 7.6 0 0 0 0-2.8l2-1.6-2-3.5-2.4 1a7.4 7.4 0 0 0-2.4-1.4L14.1 2.5H9.9l-.4 2.6a7.4 7.4 0 0 0-2.4 1.4l-2.4-1-2 3.5 2 1.6a7.6 7.6 0 0 0 0 2.8l-2 1.6 2 3.5 2.4-1a7.4 7.4 0 0 0 2.4 1.4l.4 2.6h4.2l.4-2.6a7.4 7.4 0 0 0 2.4-1.4l2.4 1 2-3.5z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2.5 3 3-3 3"/><path d="M4 11.5v-1a5 5 0 0 1 5-5h11"/><path d="m7 21.5-3-3 3-3"/><path d="M20 12.5v1a5 5 0 0 1-5 5H4"/></symbol>
+  <symbol id="i-subtasks" viewBox="0 0 24 24"><path d="M10 6h10M10 12h10M10 18h10"/><path d="m3.8 6 1.2 1.2 2.2-2.4M3.8 12l1.2 1.2 2.2-2.4"/><circle cx="5.3" cy="18" r="1.3"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-widget" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="3.5" y="13" width="17" height="7.5" rx="2"/></symbol>
+  <symbol id="i-lists" viewBox="0 0 24 24"><path d="M12 3 3 7.5l9 4.5 9-4.5z"/><path d="m3 12 9 4.5 9-4.5"/><path d="m3 16.5 9 4.5 9-4.5"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><path d="M14 3.5H7A2.5 2.5 0 0 0 4.5 6v12A2.5 2.5 0 0 0 7 20.5h10a2.5 2.5 0 0 0 2.5-2.5V9z"/><path d="M14 3.5V9h5.5M8.5 13h7M8.5 16.5h4.5"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.5 4.5 13.5H11l-1 8 8.5-11H12z"/></symbol>
+  <symbol id="i-translate" viewBox="0 0 24 24"><path d="M3.5 5.5h9M8 3.5v2M10.8 5.5c-.6 3.6-3 6.6-6.8 8.4"/><path d="M6.2 9.2c1 2 2.8 3.6 5 4.5"/><path d="m12.5 20.5 4-9 4 9M14 17.3h5"/></symbol>
+  <symbol id="i-shamsi" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M10.5 13.5h3v4"/></symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.8-.8 1.8-1.7 0-1.3-1.2-1.6-1.2-2.8 0-1 .8-1.7 1.8-1.7H17a4 4 0 0 0 4-4C21 6.5 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.1"/><circle cx="10" cy="7" r="1.1"/><circle cx="15" cy="7.5" r="1.1"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6.5 7 6.5 11.5a6.5 6.5 0 0 1-13 0C5.5 10 12 3 12 3z"/><path d="M9 15a3 3 0 0 0 3 3"/></symbol>
+  <symbol id="i-tablet" viewBox="0 0 24 24"><rect x="3.5" y="3" width="17" height="18" rx="2.5"/><path d="M10.5 18h3"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V6A2.5 2.5 0 0 0 13 3.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8.5 8-4 4 4 4M15.5 8l4 4-4 4M13.5 5l-3 14"/></symbol>
+  <symbol id="i-steps" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4.5 6h.01M4.5 12h.01M4.5 18h.01" stroke-width="3"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7.5 5.2v13.6L18.8 12z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-seal" viewBox="0 0 24 24"><path d="M12 2.8l2.1 1.6 2.6-.3 1 2.4 2.4 1-.3 2.6 1.6 2.1-1.6 2.1.3 2.6-2.4 1-1 2.4-2.6-.3L12 21.2l-2.1-1.6-2.6.3-1-2.4-2.4-1 .3-2.6L2.8 12l1.6-2.1-.3-2.6 2.4-1 1-2.4 2.6.3z" fill="currentColor" stroke="none"/><path d="m8.4 12.2 2.4 2.4 4.8-4.9" stroke="#fff" stroke-width="2.2"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to the main content</a>
+<div class="glow" aria-hidden="true"></div>
+
+<div class="langbar" lang="fa" dir="rtl" role="region" aria-label="زبان">
+  <p>این صفحه فارسی هم دارد.</p>
+  <a class="langbar__go" href="/privacy/?lang=fa" hreflang="fa" data-lang="fa">فارسی</a>
+  <button class="langbar__close" type="button" aria-label="بستن" data-langbar-close><svg class="i"><use href="#i-x"/></svg></button>
+</div>
+
+<header class="topbar" id="topbar">
+  <div class="wrap topbar__in">
+    <a class="brand" href="/en/"><img src="/assets/icons/tik-96.webp" width="34" height="34" alt=""><span>Tik</span></a>
+    <span class="topbar__spacer"></span>
+    <a class="lang-btn" href="/privacy/?lang=fa" hreflang="fa" lang="fa" data-lang="fa"><svg class="i"><use href="#i-globe"/></svg>فارسی</a>
+    <a class="btn btn--accent btn--sm topbar__dl" href="/en/#download"><svg class="i"><use href="#i-download"/></svg>Download</a>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <article class="prose">
+    <h1>Privacy</h1>
+    <p class="updated">Last updated: September 26, 2026</p>
+
+    <div class="card">
+      <p><strong>In short:</strong> Tik collects nothing about you. It has no account, it never connects to the internet, and your tasks stay on your phone.</p>
+    </div>
+
+    <h2>The Tik app</h2>
+    <ul>
+      <li>Your tasks, lists, notes and the photos you add to tasks are stored only on your phone.</li>
+      <li>Tik has no code that connects to the internet. The Android app doesn't even ask for the <code>INTERNET</code> permission.</li>
+      <li>There are no ads, no trackers and no analytics.</li>
+      <li>The widget reads the same tasks, on the phone itself.</li>
+      <li>If your phone's own backup (Google or iCloud) is on, it may back up Tik's data like it does for other apps. That is done by the phone, not by Tik.</li>
+    </ul>
+
+    <h2>Permissions the app asks for</h2>
+    <p><strong>Android</strong></p>
+    <ul>
+      <li>Notifications (<code>POST_NOTIFICATIONS</code>): for reminders.</li>
+      <li>Exact alarms (<code>USE_EXACT_ALARM</code>, and <code>SCHEDULE_EXACT_ALARM</code> on Android 12 and older): so reminders come on time.</li>
+      <li>Start after a restart (<code>RECEIVE_BOOT_COMPLETED</code>): to set reminders again after the phone restarts.</li>
+      <li><code>WAKE_LOCK</code>, <code>FOREGROUND_SERVICE</code> and <code>ACCESS_NETWORK_STATE</code>: Android's WorkManager library adds these for background work, like refreshing the widget. <code>ACCESS_NETWORK_STATE</code> can only see whether the phone is online; it is not permission to use the internet.</li>
+      <li>Photos: Tik uses Android's own photo picker, so only the photo you pick is shared with the app. No permission to see all your photos is needed.</li>
+    </ul>
+    <p><strong>iPhone and iPad</strong></p>
+    <ul>
+      <li>Notifications: for reminders. iOS asks you first.</li>
+      <li>Photos: when you pick a photo for a task, only that photo is shared with the app.</li>
+    </ul>
+
+    <h2>This website</h2>
+    <ul>
+      <li>This site is hosted on GitHub Pages. Like any server, GitHub may keep technical data such as IP addresses for security; see <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub's privacy statement</a>.</li>
+      <li>Visits are counted with GoatCounter: no cookies and no personal data. Only page views and a few clicks (like the download button) are counted.</li>
+      <li>The Android file downloads from this site itself. It is the same file as the official release on GitHub.</li>
+      <li>The site keeps a few small choices only in your own browser: your language, your color, and whether you closed the language bar. They are never sent anywhere.</li>
+      <li>Fonts and all other files come from this site itself; nothing is loaded from other font or script services.</li>
+    </ul>
+
+    <h2>Questions?</h2>
+    <p>Ask through <a href="https://mahyarmozafar.ir/#contact">Mahyar Mozafar's contact page</a>.</p>
+  </article>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__in">
+    <div>
+      <p class="footer__brand"><img src="/assets/icons/tik-96.webp" width="30" height="30" alt="">Tik — Add it. Tick it.</p>
+      <small>© 2026 Mahyar Mozafar</small>
+    </div>
+    <ul class="footer__links">
+      <li><a href="/en/">Tik home</a></li>
+      <li><a href="/en/#download">Download</a></li>
+      <li><a href="https://mahyarmozafar.ir/">Made by Mahyar Mozafar</a></li>
+      <li><a href="/privacy/?lang=fa" hreflang="fa" lang="fa" data-lang="fa">فارسی</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>
