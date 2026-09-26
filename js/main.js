@@ -240,7 +240,7 @@
 
   /* ---------- Bottom tab bar and top links follow the scroll ---------- */
   var tabbar = $('[data-tabbar]');
-  var spyTargets = [['demo', '#top'], ['features', '#features'], ['screens', '#screens'], ['download', '#download'], ['download', '#faq']];
+  var spyTargets = [['demo', '#top'], ['screens', '#screens'], ['features', '#features'], ['download', '#download'], ['download', '#faq']];
   if (tabbar && window.IntersectionObserver) {
     var drop = $('.tabbar__drop', tabbar);
     var current = null;

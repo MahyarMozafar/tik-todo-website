@@ -709,6 +709,11 @@ html.sheet-open { overflow: hidden; }
   .qr { display: flex; }
   .footer__in { grid-template-columns: 1fr auto; align-items: center; }
 }
+@media (max-width: 959px) {
+  /* Phones and tablets have the bottom bar's download button and the download section,
+     so the first screen only shows the intro and the demo. */
+  .hero__cta, .hero .inapp-hint { display: none; }
+}
 @media (max-width: 359px) {
   .tab { min-width: 60px; padding: 0 4px; font-size: 11px; }
   .tabbar__dl { padding: 0 12px; }
