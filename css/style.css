@@ -527,7 +527,11 @@ html[lang="en"] .feature p { line-height: 1.55; }
 .extras[data-platform="android"] .x-tablet .shot__frame { aspect-ratio: 1400 / 875; max-width: 640px; }
 
 .sub-head { margin: 56px 0 18px; text-align: center; font-size: 24px; font-weight: 700; }
-.vid .shot__frame { background: #000; }
+/* The poster also sits behind the video, and the video stays hidden until its
+   first frame is drawn, so starting a video never flashes a dark box. */
+.vid .shot__frame { background: var(--card) center / cover no-repeat; }
+.vid video { opacity: 0; }
+.vid.is-ready video { opacity: 1; }
 .vid__play { position: absolute; inset: 0; display: none; place-items: center; border: 0; background: rgba(0, 0, 0, .12); color: #fff; cursor: pointer; }
 .vid__play span { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: rgba(0, 0, 0, .45); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
 .vid__play svg { width: 26px; height: 26px; fill: currentColor; stroke: none; margin-inline-start: 4px; }

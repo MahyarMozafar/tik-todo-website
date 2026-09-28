@@ -523,14 +523,15 @@
     var start = function (fig) {
       var v = $('video', fig);
       var src = fileFor(fig.getAttribute('data-video')) + '.mp4';
-      if (v.getAttribute('src') !== src) { v.src = src; v.load(); }
+      if (v.getAttribute('src') !== src) { fig.classList.remove('is-ready'); v.src = src; v.load(); }
       var p = v.play();
       if (p && p.catch) p.catch(function () { fig.classList.add('needs-tap'); });
     };
     var setPosters = function () {
       figs.forEach(function (fig) {
-        var v = $('video', fig);
-        v.poster = fileFor(fig.getAttribute('data-video')) + '.webp';
+        var poster = fileFor(fig.getAttribute('data-video')) + '.webp';
+        $('video', fig).poster = poster;
+        $('.shot__frame', fig).style.backgroundImage = 'url("' + poster + '")';
       });
     };
     videoSrcFor = function () {
@@ -539,6 +540,7 @@
         var v = $('video', fig);
         if (v.getAttribute('src')) {
           var wasPlaying = !v.paused;
+          fig.classList.remove('is-ready');
           v.removeAttribute('src');
           v.load();
           if (wasPlaying) start(fig);
@@ -547,6 +549,13 @@
     };
 
     figs.forEach(function (fig) {
+      var v = $('video', fig);
+      // Show the video only once its first frame is really on screen.
+      v.addEventListener('playing', function () {
+        var show = function () { fig.classList.add('is-ready'); };
+        if (v.requestVideoFrameCallback) v.requestVideoFrameCallback(show);
+        else show();
+      });
       if (!autoplay) fig.classList.add('needs-tap');
       $('.vid__play', fig).addEventListener('click', function () {
         fig.classList.remove('needs-tap');
